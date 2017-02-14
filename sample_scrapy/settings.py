@@ -13,7 +13,7 @@ BOT_NAME = 'sample_scrapy'
 
 SPIDER_MODULES = ['sample_scrapy.spiders']
 NEWSPIDER_MODULE = 'sample_scrapy.spiders'
-
+DEFAULT_ITEM_CLASS = 'sample_scrapy.items.SampleScrapyItem'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'sample_scrapy (+http://www.yourdomain.com)'
@@ -91,5 +91,5 @@ ROBOTSTXT_OBEY = False
 
 
 ITEM_PIPELINES = {
- 'sample_scrapy.pipelines.HeartsongPipeline': 300,
+ 'sample_scrapy.pipelines.SampleScrapyPipeline': 300,
 }

@@ -12,6 +12,6 @@ class SampleScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     name =  scrapy.Field()
-    sex = scrapy.Field()
-    birthday = scrapy.Field()
+    description = scrapy.Field()
+    url = scrapy.Field()
     
