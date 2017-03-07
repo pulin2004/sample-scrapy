@@ -4,7 +4,7 @@
 
 
 from db_pool import Mysql
-from _sqlite3 import Row
+# from _sqlite3 import Row
 
 # 申请资源
 mysql = Mysql()
