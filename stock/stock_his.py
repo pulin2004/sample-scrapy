@@ -29,24 +29,32 @@ class Stock_His():
 
     def get_his_data(self):
         path = self.__get_file_path()
-        return pd.read_csv(path)
+        if os.path.exists(path):
+            return pd.read_csv(path)
+        else:
+            logger.warn("%s No file!" % (path))
+            return None
 
     def init_data(self,start,days= 10,end = None):
         logger.info("init_data %s in (%s - %s -----start!"%(self.__stock_code,start,end))
-        df = ts.get_hist_data(self.__stock_code, start, end);
-        df = df.sort_index()
-        df1 = self.__get_max_values(df, ['close', 'high', 'volume'], days)
-        df1 = df1.add_prefix("max_")
-        df2 = self.__get_min_values(df, ['close', 'low','volume'], days)
-        df2 = df2.add_prefix("min_")
-        dfa = df1.merge(df2, left_index=True, right_index=True)
-        dfb =df.merge(dfa,left_index=True, right_index=True)
-        # print dfb
-        if not os.path.exists(self.__get_dir_path()):
-            os.makedirs(self.__get_dir_path())
-        dfb.to_csv(self.__get_file_path())
-        logger.info("init_data %s in (%s - %s -----end!" %(self.__stock_code, start, end))
-        return dfb
+        df = ts.get_hist_data(self.__stock_code, start, end)
+        if df:
+            df = df.sort_index()
+            df1 = self.__get_max_values(df, ['close', 'high', 'volume'], days)
+            df1 = df1.add_prefix("max_")
+            df2 = self.__get_min_values(df, ['close', 'low','volume'], days)
+            df2 = df2.add_prefix("min_")
+            dfa = df1.merge(df2, left_index=True, right_index=True)
+            dfb =df.merge(dfa,left_index=True, right_index=True)
+            # print dfb
+            if not os.path.exists(self.__get_dir_path()):
+                os.makedirs(self.__get_dir_path())
+            dfb.to_csv(self.__get_file_path())
+            logger.info("init_data %s in (%s - %s -----end!" %(self.__stock_code, start, end))
+            return dfb
+        else:
+            logger.warn("%s No Data!"%(self.__stock_code))
+            return None
 
     def __get_max_values(self,data,max_col,traday):
         _df = data.get(max_col)
@@ -71,7 +79,7 @@ class Stock_His():
 
 if __name__ == '__main__':
     logger.info("start stock_his test!")
-    his = Stock_His("test",'600283')
-    his.init_data("2016-06-01","2016-06-20")
+    his = Stock_His("test",'603041')
+    his.init_data("2016-01-01")
     data = his.get_his_data()
     logger.debug(data)
