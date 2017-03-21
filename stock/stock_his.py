@@ -33,12 +33,12 @@ class Stock_His():
             return pd.read_csv(path)
         else:
             logger.warn("%s No file!" % (path))
-            return None
+            return pd.DataFrame()
 
     def init_data(self,start,days= 10,end = None):
         logger.info("init_data %s in (%s - %s -----start!"%(self.__stock_code,start,end))
         df = ts.get_hist_data(self.__stock_code, start, end)
-        if df:
+        if isinstance(df,pd.DataFrame) and not df.empty:
             df = df.sort_index()
             df1 = self.__get_max_values(df, ['close', 'high', 'volume'], days)
             df1 = df1.add_prefix("max_")
@@ -54,7 +54,7 @@ class Stock_His():
             return dfb
         else:
             logger.warn("%s No Data!"%(self.__stock_code))
-            return None
+            return pd.DataFrame()
 
     def __get_max_values(self,data,max_col,traday):
         _df = data.get(max_col)
