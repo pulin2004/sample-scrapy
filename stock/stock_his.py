@@ -79,7 +79,7 @@ class Stock_His():
 
 if __name__ == '__main__':
     logger.info("start stock_his test!")
-    his = Stock_His("test",'603041')
+    his = Stock_His("test1",'603041')
     his.init_data("2016-01-01")
     data = his.get_his_data()
     logger.debug(data)
