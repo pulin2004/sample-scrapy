@@ -48,7 +48,7 @@ class Validate_day_down(Abstract_validate_tactics):
                 _total += df.ix[i,'high'] -df.ix[i,'open']
                 if df.ix[i,'close'] > df.ix[i,'open']:
                     return False
-                if i == 0:
+                if i == _row + 1- his_num:
                     _pre_high=df.ix[i,'high']
                 else:
                     if _pre_high < df.ix[i,'high']:
