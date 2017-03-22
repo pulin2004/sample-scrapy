@@ -6,6 +6,7 @@ import pandas as pd
 import tushare as ts
 import logging
 import logging.config
+import numpy as np
 
 logging.config.fileConfig('logger.conf')
 logger = logging.getLogger('stock')
@@ -27,7 +28,7 @@ class Stock_Basic():
 
     def get_data(self):
         path = self.__get_file_path()
-        return pd.read_csv(path)
+        return pd.read_csv(path,dtype={'code':str})
 
     def init_data(self, date = None):
         df = ts.get_stock_basics(date)
@@ -40,5 +41,6 @@ class Stock_Basic():
 if __name__ == '__main__':
     logger.info("start stock_his test!")
     base = Stock_Basic("test")
-    data = base.init_data()
-    logger.debug(data)
+    data = base.get_data()
+    logger.debug(data['code'])
+
