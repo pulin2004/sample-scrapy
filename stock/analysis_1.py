@@ -22,4 +22,7 @@ def get_data():
 if __name__ == "__main__":
     logger.info("start analysis_1 test!")
     df = get_data()
+    df = df[df.max_close>(df.close*1.1)]
+    print df.shape
+    df = df[df.close>(df.min_low*1.1)]
     print df.shape
