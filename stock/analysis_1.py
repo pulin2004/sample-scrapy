@@ -22,7 +22,12 @@ def get_data():
 if __name__ == "__main__":
     logger.info("start analysis_1 test!")
     df = get_data()
-    df = df[df.max_close>(df.close*1.1)]
-    print df.shape
-    df = df[df.close>(df.min_low*1.1)]
-    print df.shape
+    df1 = df[df.max_close>(df.close*1.1)]
+    df1  = df1[['stock_code','date','open','high','close','max_high','min_low']]
+    df1.to_csv("./testdata/max_fluctuate_1.cvs")
+    print df1.shape
+    df2 = df[df.close>(df.min_low*1.1)]
+    df2 = df2[df2.low<>df2.min_low]
+    df2 = df2[['stock_code', 'date', 'open', 'high', 'close', 'max_high', 'min_low','low']]
+    df2.to_csv("./testdata/max_fluctuate_2.cvs")
+    print df2.shape
