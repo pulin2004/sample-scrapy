@@ -29,8 +29,9 @@ class BollTestCase(unittest.TestCase):
         _boll.addDayValue(3.3,1,0.8,3.2,3.3,99822)
         _boll.addDayValue(1.8,1.1,2,3.1,3,78923)
         _boll.addDayValue(2.7,1,1.4,2.4,2.5,28993)
+        _boll.addDayValue(3.2, 1, 0.8, 3.2, 3.3, 94822)
         _data = _boll.getData();
-        self.assertEqual(len(_data),3)
+        self.assertEqual(len(_data),4)
 
 # 测试
 if __name__ == "__main__":

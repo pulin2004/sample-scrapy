@@ -29,6 +29,15 @@ class Region():
     def len(self):
         return self.__data.__len__()
 
+    def isSection(self,section):
+        return self.__section == section
+
+    #取列的平均值
+    def getColumnAverage(self,col):
+        _val = np.array(self.__data)
+        _seq = _val[:,col]
+        return float(sum(_seq)) / len(_seq)
+
 class Section():
 
     def __init__(self, lowPoint,highPoint):
