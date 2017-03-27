@@ -83,8 +83,8 @@ class Boll():
 
     def __getUnit(self,upper,middle):
         _dif = []
-        for i in len(middle):
-            if not math.isnan(i):
+        for i in range(0,len(middle)):
+            if not math.isnan(middle[i]):
                 _dif.append(upper[i] - middle[i])
         return _dif
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     logger.debug("start Boll()")
     import tushare as ts
     import trend_strategy
-    df = ts.get_hist_data('000877','2016-12-01')
+    df = ts.get_hist_data('600345','2016-12-01')
     df = df.sort_index()
     # print df
     _boll = Boll()
