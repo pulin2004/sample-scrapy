@@ -68,9 +68,7 @@ class Boll():
         return self.__sections[-1]
 
     def setSections(self,upper,middle):
-        _u = np.array(upper)
-        _m = np.array(middle)
-        _dif = _u-_m
+        _dif = self.__getUnit(upper,middle)
         _max = max(_dif)
         _min = min(_dif)
         _unit =(_max -_min)/self.__num
@@ -82,6 +80,13 @@ class Boll():
                 _high =_min+_unit
             self.__sections.append(Section(_min,_high))
             _min = _high
+
+    def __getUnit(self,upper,middle):
+        _dif = []
+        for i in len(middle):
+            if not math.isnan(i):
+                _dif.append(upper[i] - middle[i])
+        return _dif
 
     def setMsg(self,msg):
         self.__msg = self.__msg+msg+" --,-- "
