@@ -98,7 +98,7 @@ if __name__ == "__main__":
     logger.debug("start Boll()")
     import tushare as ts
     import trend_strategy
-    df = ts.get_hist_data('600345','2016-12-01')
+    df = ts.get_hist_data('300321','2016-12-01')
     df = df.sort_index()
     # print df
     _boll = Boll()
